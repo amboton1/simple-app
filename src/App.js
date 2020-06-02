@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import BeerList from './components/Input';
+import BeerList from './components/BeerList';
 
 function App() {
   return (
