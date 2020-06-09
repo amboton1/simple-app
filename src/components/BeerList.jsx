@@ -27,19 +27,38 @@ class BeerList extends Component {
         }
     }
 
+    createElements(){
+        const { beers } = this.state;
+
+        let firstRow = [];
+
+        for (let index = 0; index < 4; index++) {
+            firstRow.push(<div>{`${beers[index].id} : ${beers[index].name}`}</div>);
+        }
+
+        console.log(firstRow);
+        const sliced = Math.floor(beers.length/2);
+        
+        let oddElements = [];
+        
+        for(let i = sliced; i < beers.length; i++){
+            if (beers[i].id % 2 === 1) {
+                oddElements.push(<div>{`${beers[i].id} : ${beers[i].name}`}</div>);
+            }
+        }
+    }
+
     render() {
-        const {beers} = this.state;
+        // const {beers} = this.state;
 
-        let arr = beers.slice(0, 5);
+        // let arr = beers.slice(0, 5);
 
-        this.loop();
+       // this.loop();
 
         return(
-            arr.map(beer => 
-                <div className="container">
-                    <Beer id={beer.id} name={beer.name} />
-                </div>
-            )
+            <div>
+                {this.createElements()}
+            </div>
         );
     }
 }
