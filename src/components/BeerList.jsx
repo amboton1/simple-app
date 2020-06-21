@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Beer from './Beer';
 
 class BeerList extends Component {
 
@@ -15,46 +14,41 @@ class BeerList extends Component {
         })
     }
 
-    loop = () => {
-        const { beers } = this.state;
-
-        const sliced = Math.floor(beers.length/2);
-
-        for (let index = sliced; index < beers.length; index++) {
-           if (beers[index].id % 2 === 1) {
-               console.log(beers[index].id);
-           }
-        }
-    }
-
     createElements(){
         const { beers } = this.state;
 
-        let firstRow = [];
+        // first 5 beers
+        let arr = beers.slice(0, 5);
+        let firstFive = [];
 
-        for (let index = 0; index < 4; index++) {
-            firstRow.push(<div>{`${beers[index].id} : ${beers[index].name}`}</div>);
+        for (let index = 0; index < arr.length; index++) {
+            firstFive.push(<div>{`${arr[index].id} : ${arr[index].name}`}</div>)
         }
 
-        console.log(firstRow);
+        // half of the list
         const sliced = Math.floor(beers.length/2);
-        
+
         let oddElements = [];
-        
+
+        // only odd numbers from half the list
         for(let i = sliced; i < beers.length; i++){
             if (beers[i].id % 2 === 1) {
                 oddElements.push(<div>{`${beers[i].id} : ${beers[i].name}`}</div>);
             }
         }
+
+        // merge theese two into one array
+        let finalArray = [];
+        finalArray.push(...firstFive, ...oddElements);
+
+        for (let index = 0; index < finalArray.length; index++) {
+            console.log(finalArray[index])
+        }
+
+        return finalArray;
     }
 
     render() {
-        // const {beers} = this.state;
-
-        // let arr = beers.slice(0, 5);
-
-       // this.loop();
-
         return(
             <div>
                 {this.createElements()}
